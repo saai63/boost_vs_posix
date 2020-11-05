@@ -11,7 +11,6 @@ public:
    bool bOpenQueue(int flags, bool bBlock, long max_msgs, long max_msg_size);
    bool bCloseQueue();
    bool bDeleteQueue();
-   int getLastErrorCode();
 
    bool bSendMessage(void* buffer, long length);
    bool bReceiveMessage(void* buffer, long length);
