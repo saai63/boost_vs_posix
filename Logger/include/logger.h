@@ -30,11 +30,11 @@
 #define LOG_INFO 4
 #define LOG_DEBUG 8
 
-#define SET_LOG_LEVEL(ucLogLevel) eHorizon::Logger::getInstance()->vSetLogLevel(ucLogLevel)
-#define SET_LOG_FILE(ucLogFile) eHorizon::Logger::getInstance()->vSetLogFile(ucLogFile)
+#define SET_LOG_LEVEL(ucLogLevel) Logger::getInstance()->vSetLogLevel(ucLogLevel)
+#define SET_LOG_FILE(ucLogFile) Logger::getInstance()->vSetLogFile(ucLogFile)
 
-#define DEBUG_L1(format, ...) eHorizon::Logger::getInstance()->PrintLog(LOG_ERROR, __FILE__, __LINE__, format, ##__VA_ARGS__)
-#define DEBUG_L2(format, ...) eHorizon::Logger::getInstance()->PrintLog(LOG_WARN, __FILE__, __LINE__, format, ##__VA_ARGS__)
-#define DEBUG_L3(format, ...) eHorizon::Logger::getInstance()->PrintLog(LOG_INFO, __FILE__, __LINE__, format, ##__VA_ARGS__)
-#define DEBUG_L4(format, ...) eHorizon::Logger::getInstance()->PrintLog(LOG_DEBUG, __FILE__, __LINE__, format, ##__VA_ARGS__)
+#define DEBUG_L1(format, ...) Logger::getInstance()->PrintLog(LOG_ERROR, __FILE__, __LINE__, format, ##__VA_ARGS__)
+#define DEBUG_L2(format, ...) Logger::getInstance()->PrintLog(LOG_WARN, __FILE__, __LINE__, format, ##__VA_ARGS__)
+#define DEBUG_L3(format, ...) Logger::getInstance()->PrintLog(LOG_INFO, __FILE__, __LINE__, format, ##__VA_ARGS__)
+#define DEBUG_L4(format, ...) Logger::getInstance()->PrintLog(LOG_DEBUG, __FILE__, __LINE__, format, ##__VA_ARGS__)
 #endif
