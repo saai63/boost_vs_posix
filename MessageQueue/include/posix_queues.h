@@ -1,14 +1,16 @@
 #ifndef POSIX_MSG_QUEUE_H
 #define POSIX_MSG_QUEUE_H
 
+#include <string>
 #include "MessageIF.h"
+#include <mqueue.h>
 
-class LoggerIF;
+class Logger;
 
 class posix_queues : public MessageQueueIF{
 public:
-   posix_queues(std::string szQueueName, LoggerIF* logger);
-   bool bOpenQueue(int flags, bool bBlock, long max_msgs, long max_msg_size);
+   posix_queues(std::string szQueueName, Logger* logger);
+   bool bOpenQueue(eMqMode mode, bool bReadOnly, long max_msgs, long max_msg_size);
    bool bCloseQueue();
    bool bDeleteQueue();
 
@@ -18,7 +20,7 @@ private:
    std::string m_szQueueName;
    mqd_t m_hdl;
    int m_lastErrCode;
-   LoggerIF* m_logger;
+   Logger* m_logger;
 };
 
 #endif
