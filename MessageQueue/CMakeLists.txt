@@ -20,9 +20,23 @@ install(TARGETS MessageQueue_posix DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../li
 install(TARGETS MessageQueue_boost DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../lib)
 install(DIRECTORY "include" DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../ FILES_MATCHING PATTERN "*.h")
 
-#add_executable(genericLoggerTest test/test_logger.cpp)
-#target_include_directories(genericLoggerTest PUBLIC ./include)
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
-#target_link_libraries(genericLoggerTest PUBLIC genericLogger ${GTEST_LIBRARY} pthread)
-#install(TARGETS genericLoggerTest DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+# Test
+## Posix Message queues
+add_executable(MessageQueue_posix_Test test/test_posix_queues.cpp)
+target_include_directories(MessageQueue_posix_Test PUBLIC ./include)
+target_include_directories(MessageQueue_posix_Test PUBLIC ../include)
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+find_library(genericLogger_lib NAMES genericLogger HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../lib )
+target_link_libraries(MessageQueue_posix_Test PUBLIC MessageQueue_posix ${genericLogger_lib} ${GTEST_LIBRARY} pthread rt)
+install(TARGETS MessageQueue_posix_Test DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
+## Boost Message queues
+add_executable(MessageQueue_boost_Test test/test_boost_queues.cpp)
+target_include_directories(MessageQueue_boost_Test PUBLIC ./include)
+target_include_directories(MessageQueue_boost_Test PUBLIC ../include)
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+find_library(genericLogger_lib NAMES genericLogger HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../lib )
+target_link_libraries(MessageQueue_boost_Test PUBLIC MessageQueue_boost ${genericLogger_lib} ${GTEST_LIBRARY} pthread rt)
+install(TARGETS MessageQueue_boost_Test DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)
