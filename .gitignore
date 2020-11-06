@@ -1,0 +1,6 @@
+include/*
+lib/*
+Logger/build/* 
+Logger/bin/* 
+MessageQueue/build/*
+MessageQueue/bin/*
