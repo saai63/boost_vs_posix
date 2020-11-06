@@ -47,20 +47,28 @@ bool boost_queues::bCloseQueue()
 
 bool boost_queues::bDeleteQueue()
 {
-   return remove(m_szQueueName.c_str());
+   return m_hdl->remove(m_szQueueName.c_str());
 }
 
 bool boost_queues::bSendMessage(void* buffer, long length)
 {
    bool bReturn = true;
-   try
+   if(!m_hdl)
    {
-       m_hdl->send(buffer, length, 0);
-   }
-   catch(const std::exception& e)
-   {
-       m_logger->DEBUG_L1("Exception caught : %s\n", e.what());
+       DEBUG_L1("Queue is not open\n");
        bReturn = false;
+   }
+   else
+   {
+       try
+       {
+           m_hdl->send(buffer, length, 0);
+       }
+       catch (const std::exception &e)
+       {
+           m_logger->DEBUG_L1("Exception caught : %s\n", e.what());
+           bReturn = false;
+       }
    }
    return bReturn;
 }

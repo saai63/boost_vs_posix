@@ -23,7 +23,7 @@ bool posix_queues::bOpenQueue(eMqMode mode, bool bReadOnly, long max_msgs, long 
    bool bReturn = false;
 
    int flags = 0;
-   if(mode == MQ_CREATE)
+   if(mode != MQ_OPEN)
    {
       flags = O_CREAT | O_EXCL;
    }
